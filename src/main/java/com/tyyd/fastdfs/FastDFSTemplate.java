@@ -10,8 +10,10 @@ import org.csource.common.MyException;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.ProtoCommon;
 import org.csource.fastdfs.StorageClient;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tyyd.fastdfs.exception.FastDFSException;
+import com.tyyd.fastdfs.mapper.FastDfsMapper;
 import com.tyyd.fastdfs.pool.ConnectionPoolFactory;
 
 /**
@@ -21,6 +23,8 @@ public class FastDFSTemplate {
 
 	private ConnectionPoolFactory connPoolFactory;
 	private FastDFSTemplateFactory factory;
+	@Autowired
+	private FastDfsMapper fastDfsMapper;
 
 	public FastDFSTemplate(FastDFSTemplateFactory factory) {
 		this.connPoolFactory = new ConnectionPoolFactory(factory);
@@ -38,8 +42,13 @@ public class FastDFSTemplate {
 	 *
 	 * @throws FastDFSException
 	 */
-	public FastDfsInfo upload(byte[] data, String ext) throws FastDFSException {
-		return this.upload(data, ext, null);
+	public FastDfsInfo upload(FastDfsInfo dfs) throws FastDFSException {
+		fastDfsMapper.add(dfs);
+		FastDfsInfo tmp =  this.upload(dfs.getFastDfsInfoBytes(), dfs.getExt(), null);
+		dfs.setGroup(tmp.getGroup());
+		dfs.setPath(tmp.getPath());
+		fastDfsMapper.update(dfs);
+		return dfs;
 	}
 
 	/**
@@ -80,6 +89,10 @@ public class FastDFSTemplate {
 		} finally {
 			releaseClient(client);
 		}
+	}
+	public byte[] loadFileByUseridAndFileName(FastDfsInfo dfs) throws FastDFSException {
+		FastDfsInfo fastDfsInfo = fastDfsMapper.query(dfs);
+		return this.loadFile(fastDfsInfo.getGroup(), fastDfsInfo.getPath());
 	}
 
 	/**
@@ -124,6 +137,7 @@ public class FastDFSTemplate {
 	 * @throws FastDFSException
 	 */
 	public void deleteFile(FastDfsInfo dfs) throws FastDFSException {
+		fastDfsMapper.add(dfs);
 		this.deleteFile(dfs.getGroup(), dfs.getPath());
 	}
 

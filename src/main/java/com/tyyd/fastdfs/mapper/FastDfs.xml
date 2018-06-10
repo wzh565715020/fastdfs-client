@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<!-- CREATE TABLE `fastdfsfileinfo` (
+	  `id` int(11) NOT NULL AUTO_INCREMENT,
+	  `userid` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+	  `name` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+	  `ext` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+	  `group` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+	  `path` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+	 -->
+	<mapper namespace="com.tyyd.fastdfs.mapper.FastDfsMapper">
+	    <insert id="add" parameterType="FastDfsInfo" >
+	        insert into fastdfsfileinfo ( userid , name ,ext, `group` , path) values (#{userId},#{name},#{ext},#{group},#{path})
+	    </insert>
+	    
+	    <delete id="delete" parameterType="FastDfsInfo" >
+	        delete from fastdfsfileinfo where userid= #{userId} and name = #{name} 
+	    </delete>
+
+	    <update id="update" parameterType="FastDfsInfo" >
+	        update fastdfsfileinfo set `group`=#{group},path = #{path} where userid= #{userId} and name = #{name}    
+	    </update>
+	    <select id="query" resultType="FastDfsInfo">
+	        select * from   fastdfsfileinfo  where  userid= #{userId}
+	    </select>	    
+	</mapper>
+

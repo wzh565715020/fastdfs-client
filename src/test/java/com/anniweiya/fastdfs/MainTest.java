@@ -33,7 +33,12 @@ public class MainTest {
 
     @Test
     public void testUploadAndDel() throws FastDFSException {
-        FastDfsInfo rv = dfsTemplate.upload("".getBytes(), "txt");
+    	FastDfsInfo fastDfsInfo = new FastDfsInfo();
+    	fastDfsInfo.setName("123");
+    	fastDfsInfo.setFastDfsInfoBytes("1231312".getBytes());
+    	fastDfsInfo.setUserId("1");
+    	fastDfsInfo.setExt("txt");
+        FastDfsInfo rv = dfsTemplate.upload(fastDfsInfo);
         System.out.println(rv);
         dfsTemplate.deleteFile(rv);
     }
@@ -62,14 +67,24 @@ public class MainTest {
     }
     @Test
     public void testUploadAndGet() throws FastDFSException {
-        FastDfsInfo rv = dfsTemplate.upload("123213".getBytes(), "txt");
+    	FastDfsInfo fastDfsInfo = new FastDfsInfo();
+    	fastDfsInfo.setName("123");
+    	fastDfsInfo.setFastDfsInfoBytes("1231312".getBytes());
+    	fastDfsInfo.setUserId("1");
+    	fastDfsInfo.setExt("txt");
+        FastDfsInfo rv = dfsTemplate.upload(fastDfsInfo);
         System.out.println(rv);
         byte[] bytes =  dfsTemplate.loadFile(rv);
         System.out.println(new String(bytes));
     }
     @Test
     public void testUploadAndGetMata() throws FastDFSException {
-        FastDfsInfo rv = dfsTemplate.upload("123213".getBytes(), "txt");
+    	FastDfsInfo fastDfsInfo = new FastDfsInfo();
+    	fastDfsInfo.setName("123");
+    	fastDfsInfo.setFastDfsInfoBytes("1231312".getBytes());
+    	fastDfsInfo.setUserId("1");
+    	fastDfsInfo.setExt("txt");
+        FastDfsInfo rv = dfsTemplate.upload(fastDfsInfo);
         System.out.println(rv);
         NameValuePair pair = new NameValuePair();
         pair.setName("title");

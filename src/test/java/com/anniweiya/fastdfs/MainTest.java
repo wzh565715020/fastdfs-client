@@ -84,7 +84,12 @@ public class MainTest {
     	fastDfsInfo.setFastDfsInfoBytes("1231312".getBytes());
     	fastDfsInfo.setUserId("1");
     	fastDfsInfo.setExt("txt");
-        FastDfsInfo rv = dfsTemplate.upload(fastDfsInfo);
+        //FastDfsInfo rv = dfsTemplate.upload(fastDfsInfo);
+    	FastDfsInfo rv = new FastDfsInfo();
+    	rv.setGroup("group1");
+    	rv.setPath("M00/00/00/wKgCbFsdcuSAc7-tAAAAB6M6Xro706.txt");
+    	rv.setExt("txt");
+    	rv.setName("123");
         System.out.println(rv);
         NameValuePair pair = new NameValuePair();
         pair.setName("title");
@@ -95,6 +100,8 @@ public class MainTest {
         NameValuePair[] pair1 = {pair , pair2};
         dfsTemplate.setMetadata(rv, pair1, ProtoCommon.STORAGE_SET_METADATA_FLAG_OVERWRITE);
         NameValuePair[] pairs =  dfsTemplate.getMetadata(rv);
+        
         System.out.println(Arrays.toString(pairs));
+        System.out.println(new String(dfsTemplate.loadFile(rv)));
     }
 }

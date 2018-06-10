@@ -1,4 +1,4 @@
-package com.anniweiya.fastdfs;
+package com.tyyd.fastdfs;
 
 import com.tyyd.fastdfs.FastDFSTemplate;
 import com.tyyd.fastdfs.FastDfsInfo;

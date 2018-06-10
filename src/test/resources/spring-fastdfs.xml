@@ -1,111 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns="http://www.springframework.org/schema/beans"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xmlns:tx="http://www.springframework.org/schema/tx" 
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-       xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
      http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-    <context:property-placeholder location="classpath:contextprop.properties" />
-	<!-- 阿里巴巴Druid连接池 -->  
-    <bean id="dataSource_druid" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">  
-  
-        <!-- 基本属性 url、user、password   根据url自动识别dbType，不用配置driverClassName-->  
-        <property name="url" value="${druid.jdbc.url}" />  
-        <property name="username" value="${druid.jdbc.username}" />  
-        <property name="password" value="${druid.jdbc.password}" />  
-  
-        <!-- 配置初始化大小、最小空闲、最大连接数-->  
-        <property name="initialSize" value="${druid.jdbc.initialSize}" />  
-        <property name="minIdle" value="${druid.jdbc.minIdle}" />  
-        <property name="maxActive" value="${druid.jdbc.maxActive}" />  
-  
-        <!-- 配置获取连接等待超时的时间 单位毫秒 -->  
-        <property name="maxWait" value="60000" />  
-  
-        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->  
-        <property name="timeBetweenEvictionRunsMillis" value="60000" />  
-  
-        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->  
-        <property name="minEvictableIdleTimeMillis" value="300000" />  
-  
-        <!-- 检测连接是否有效的sql，要求是一个查询语句 -->  
-        <property name="validationQuery" value="SELECT 'x'" />  
-  
-        <!-- 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。 -->  
-        <property name="testWhileIdle" value="true" />  
-        <property name="testOnBorrow" value="false" /> <!-- 申请连接时执行validationQuery检测连接是否有效,不需要检测-->  
-        <property name="testOnReturn" value="false" /> <!-- 归还连接时执行validationQuery检测连接是否有效,不需要检测-->  
-  
-        <!-- 打开PSCache，在mysql5.5以下的版本中没有PSCache功能，建议关闭掉。5.5及以上版本有PSCache，建议开启。 -->  
-        <property name="poolPreparedStatements" value="true" />  
-        <property name="maxPoolPreparedStatementPerConnectionSize" value="100" />  
-  
-        <!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->  
-        <property name="filters" value="stat" />  
-  
-    </bean>  
-	
+	<context:property-placeholder location="classpath:contextprop.properties" />
+	<!-- 阿里巴巴Druid连接池 -->
+	<bean id="dataSource_druid" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
 
+		<!-- 基本属性 url、user、password 根据url自动识别dbType，不用配置driverClassName -->
+		<property name="url" value="${druid.jdbc.url}" />
+		<property name="username" value="${druid.jdbc.username}" />
+		<property name="password" value="${druid.jdbc.password}" />
 
-	<bean id = "mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.tyyd.fastdfs.mapper"/>
+		<!-- 配置初始化大小、最小空闲、最大连接数 -->
+		<property name="initialSize" value="${druid.jdbc.initialSize}" />
+		<property name="minIdle" value="${druid.jdbc.minIdle}" />
+		<property name="maxActive" value="${druid.jdbc.maxActive}" />
+
+		<!-- 配置获取连接等待超时的时间 单位毫秒 -->
+		<property name="maxWait" value="60000" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+
+		<!-- 检测连接是否有效的sql，要求是一个查询语句 -->
+		<property name="validationQuery" value="SELECT 'x'" />
+
+		<!-- 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。 -->
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" /> <!-- 申请连接时执行validationQuery检测连接是否有效,不需要检测 -->
+		<property name="testOnReturn" value="false" /> <!-- 归还连接时执行validationQuery检测连接是否有效,不需要检测 -->
+
+		<!-- 打开PSCache，在mysql5.5以下的版本中没有PSCache功能，建议关闭掉。5.5及以上版本有PSCache，建议开启。 -->
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize"
+			value="100" />
+
+		<!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
+		<property name="filters" value="stat" />
+
 	</bean>
-		  <!-- the transactional advice (what 'happens'; see the <aop:advisor/> bean below) -->
-   <tx:advice id="txAdvice" transaction-manager="transactionManager">
-    <!-- the transactional semantics... -->
-   <tx:attributes>
-    <!-- all methods starting with 'get' are read-only -->
-    <tx:method name="get*" read-only="true"/>
-    <tx:method name="set*" read-only="true"/>
-    <tx:method name="load*" read-only="true"/>
-    <!-- other methods use the default transaction settings (see below) -->
-    <tx:method name="*"/>
-    </tx:attributes>
-  </tx:advice>
-   <aop:config>
-	  <aop:pointcut id="fastdfsOperation" expression="execution(public * com.tyyd.fastdfs.FastDFSTemplate..*.*(..))"/>
-	  <aop:advisor advice-ref="txAdvice" pointcut-ref="fastdfsOperation"/>
-  </aop:config>
+
+
+
+	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.tyyd.fastdfs.mapper" />
+	</bean>
+	<!-- the transactional advice (what 'happens'; see the <aop:advisor/> bean 
+		below) -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<!-- the transactional semantics... -->
+		<tx:attributes>
+			<!-- all methods starting with 'get' are read-only -->
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="set*" read-only="true" />
+			<tx:method name="load*" read-only="true" />
+			<!-- other methods use the default transaction settings (see below) -->
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<aop:pointcut id="fastdfsOperation"
+			expression="execution(public * com.tyyd.fastdfs.FastDFSTemplate..*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="fastdfsOperation" />
+	</aop:config>
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="typeAliasesPackage" value="com.tyyd.fastdfs" />
-		<property name="dataSource" ref="dataSource_druid"/>
-		<property name="mapperLocations" value="classpath:com/tyyd/fastdfs/mapper/*.xml"/>
+		<property name="dataSource" ref="dataSource_druid" />
+		<property name="mapperLocations" value="classpath:com/tyyd/fastdfs/mapper/*.xml" />
 	</bean>
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-  	   <property name="dataSource" ref="dataSource_druid" />
-   </bean>
-  <bean id="fastDFSFactory" class="com.tyyd.fastdfs.FastDFSTemplateFactory" init-method="init">
-    <!--连接超时的时限，单位为秒-->
-    <property name="g_connect_timeout" value="60"/>
-    <!--网络超时的时限，单位为秒-->
-    <property name="g_network_timeout" value="80"/>
-    <!--防盗链配置-->
-    <property name="g_anti_steal_token" value="true"/>
-    <property name="g_secret_key" value="FastDFS1234567890"/>
-    <property name="poolConfig">
-      <bean class="com.tyyd.fastdfs.pool.PoolConfig">
-        <!--池的大小-->
-        <property name="maxTotal" value="100"/>
-        <!--连接池中最大空闲的连接数-->
-        <property name="maxIdle" value="10"/>
-      </bean>
-    </property>
-    <!--tracker的配置 ","逗号分隔-->
-    <property name="tracker_servers" value="192.168.2.108:22122"/>
-    <!--HTTP访问服务的端口号-->
-    <property name="g_tracker_http_port" value="8080"/>
-    <!--nginx的对外访问地址，如果没有端口号，将取g_tracker_http_port配置的端口号 ","逗号分隔-->
-    <property name="nginx_address" value="192.168.2.108:8080"/>
-  </bean>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource_druid" />
+	</bean>
+	<bean id="fastDFSFactory" class="com.tyyd.fastdfs.FastDFSTemplateFactory"
+		init-method="init">
+		<!--连接超时的时限，单位为秒 -->
+		<property name="g_connect_timeout" value="${g_connect_timeout}" />
+		<!--网络超时的时限，单位为秒 -->
+		<property name="g_network_timeout" value="${g_network_timeout}" />
+		<!--防盗链配置 -->
+		<property name="g_anti_steal_token" value="${g_anti_steal_token}" />
+		<property name="g_secret_key" value="${g_secret_key}" />
+		<property name="poolConfig">
+			<bean class="com.tyyd.fastdfs.pool.PoolConfig">
+				<!--池的大小 -->
+				<property name="maxTotal" value="${pool_max_total}" />
+				<!--连接池中最大空闲的连接数 -->
+				<property name="maxIdle" value="${pool_max_idle}" />
+			</bean>
+		</property>
+		<!--tracker的配置 ","逗号分隔 -->
+		<property name="tracker_servers" value="${tracker_servers}" />
+		<!--HTTP访问服务的端口号 -->
+		<property name="g_tracker_http_port" value="${g_tracker_http_port}" />
+		<!--nginx的对外访问地址，如果没有端口号，将取g_tracker_http_port配置的端口号 ","逗号分隔 -->
+		<property name="nginx_address" value="${nginx_address}" />
+	</bean>
 
-  <!--注入模板类-->
-  <bean id="fastDFSTemplate" class="com.tyyd.fastdfs.FastDFSTemplate">
-    <constructor-arg ref="fastDFSFactory"/>
-  </bean>
+	<!--注入模板类 -->
+	<bean id="fastDFSTemplate" class="com.tyyd.fastdfs.FastDFSTemplate">
+		<constructor-arg ref="fastDFSFactory" />
+	</bean>
 
 </beans>

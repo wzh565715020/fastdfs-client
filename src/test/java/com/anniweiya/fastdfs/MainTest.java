@@ -97,7 +97,7 @@ public class MainTest {
         NameValuePair pair2 = new NameValuePair();
         pair2.setName("name");
         pair2.setValue("1.txt");
-        NameValuePair[] pair1 = {pair , pair2};
+        NameValuePair[] pair1 = {pair , pair2,new NameValuePair("width", "1024"), new NameValuePair("heigth", "768")};
         dfsTemplate.setMetadata(rv, pair1, ProtoCommon.STORAGE_SET_METADATA_FLAG_OVERWRITE);
         NameValuePair[] pairs =  dfsTemplate.getMetadata(rv);
         

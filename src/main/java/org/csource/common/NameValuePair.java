@@ -20,7 +20,13 @@ public class NameValuePair {
 
     public NameValuePair() {
     }
-
+    
+    @Override
+    public String toString() {
+        return "NameValuePair{" + "name ='" + name + '\'' +
+               ", value ='" + value + '\'' +
+               '}';
+    }
     public NameValuePair(String name) {
         this.name = name;
     }

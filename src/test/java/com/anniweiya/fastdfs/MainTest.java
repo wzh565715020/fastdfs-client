@@ -4,6 +4,8 @@ import com.tyyd.fastdfs.FastDFSTemplate;
 import com.tyyd.fastdfs.FastDfsInfo;
 import com.tyyd.fastdfs.exception.FastDFSException;
 
+import org.csource.common.NameValuePair;
+import org.csource.fastdfs.ProtoCommon;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -12,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,5 +66,20 @@ public class MainTest {
         System.out.println(rv);
         byte[] bytes =  dfsTemplate.loadFile(rv);
         System.out.println(new String(bytes));
+    }
+    @Test
+    public void testUploadAndGetMata() throws FastDFSException {
+        FastDfsInfo rv = dfsTemplate.upload("123213".getBytes(), "txt");
+        System.out.println(rv);
+        NameValuePair pair = new NameValuePair();
+        pair.setName("title");
+        pair.setValue("112321321");
+        NameValuePair pair2 = new NameValuePair();
+        pair2.setName("name");
+        pair2.setValue("1.txt");
+        NameValuePair[] pair1 = {pair , pair2};
+        dfsTemplate.setMetadata(rv, pair1, ProtoCommon.STORAGE_SET_METADATA_FLAG_OVERWRITE);
+        NameValuePair[] pairs =  dfsTemplate.getMetadata(rv);
+        System.out.println(Arrays.toString(pairs));
     }
 }

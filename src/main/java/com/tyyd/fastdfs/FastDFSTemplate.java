@@ -137,8 +137,10 @@ public class FastDFSTemplate {
 	 * @throws FastDFSException
 	 */
 	public void deleteFile(FastDfsInfo dfs) throws FastDFSException {
-		fastDfsMapper.add(dfs);
+		fastDfsMapper.delete(dfs);
+		
 		this.deleteFile(dfs.getGroup(), dfs.getPath());
+		
 	}
 
 	/**

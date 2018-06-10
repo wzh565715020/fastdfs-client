@@ -13,8 +13,6 @@ import java.util.List;
 /**
  * FastDFS 初始化
  *
- * @author KisChang
- * @version 1.0
  */
 public class FastDFSTemplateFactory {
 

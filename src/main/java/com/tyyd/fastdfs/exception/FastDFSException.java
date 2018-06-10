@@ -3,8 +3,6 @@ package com.tyyd.fastdfs.exception;
 /**
  * FastDFS Exception
  *
- * @author KisChang
- * @version 1.0
  */
 public class FastDFSException extends Exception {
 

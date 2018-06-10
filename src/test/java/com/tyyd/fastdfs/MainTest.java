@@ -21,8 +21,6 @@ import java.util.Map;
 /**
  * 连接池测试
  *
- * @author KisChang
- * @version 1.0
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-fastdfs.xml")

@@ -50,7 +50,10 @@ public class MainTest {
                 byte[] b = new byte[fis.available()];
                 fis.read(b);
                 Map<String, String> map = new HashMap<>();
-                FastDfsInfo rv = dfsTemplate.upload(b, "jpg", map);
+                FastDfsInfo fastDfsInfo = new FastDfsInfo();
+            	fastDfsInfo.setFastDfsInfoBytes(b);
+            	fastDfsInfo.setExt("jpg");
+                FastDfsInfo rv = dfsTemplate.upload(fastDfsInfo, map);
                 System.out.println(rv.getFileAbsolutePath());
                 dfsTemplate.deleteFile(rv);
             } catch (Exception e) {

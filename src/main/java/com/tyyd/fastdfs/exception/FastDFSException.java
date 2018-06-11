@@ -6,7 +6,11 @@ package com.tyyd.fastdfs.exception;
  */
 public class FastDFSException extends Exception {
 
-    private int errorCode = 0;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -666979408658206455L;
+	private int errorCode = 0;
 
     public FastDFSException(int errorCode) {
         this.errorCode = errorCode;

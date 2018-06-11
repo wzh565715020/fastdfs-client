@@ -41,11 +41,9 @@ public class FastDfsTemplate {
 	 * @throws FastDFSException
 	 */
 	public FastDfsInfo upload(FastDfsInfo dfs) throws FastDFSException {
-		fastDfsMapper.add(dfs);
 		FastDfsInfo tmp =  this.upload(dfs.getFastDfsInfoBytes(), dfs.getExt(), null);
 		dfs.setGroup(tmp.getGroup());
 		dfs.setPath(tmp.getPath());
-		fastDfsMapper.update(dfs);
 		return dfs;
 	}
 	/**

@@ -1,6 +1,6 @@
 package com.tyyd.fastdfs;
 
-import com.tyyd.fastdfs.FastDFSTemplate;
+import com.tyyd.fastdfs.FastDfsTemplate;
 import com.tyyd.fastdfs.FastDfsInfo;
 import com.tyyd.fastdfs.exception.FastDFSException;
 
@@ -27,7 +27,7 @@ import java.util.Map;
 public class MainTest {
 
     @Resource
-    private FastDFSTemplate dfsTemplate;
+    private FastDfsTemplate dfsTemplate;
 
     @Test
     public void testUploadAndDel() throws FastDFSException {

@@ -19,14 +19,14 @@ import com.tyyd.fastdfs.pool.ConnectionPoolFactory;
 /**
  * FastDFS 模板类
  */
-public class FastDFSTemplate {
+public class FastDfsTemplate {
 
 	private ConnectionPoolFactory connPoolFactory;
-	private FastDFSTemplateFactory factory;
+	private FastDfsTemplateFactory factory;
 	@Autowired
 	private FastDfsMapper fastDfsMapper;
 
-	public FastDFSTemplate(FastDFSTemplateFactory factory) {
+	public FastDfsTemplate(FastDfsTemplateFactory factory) {
 		this.connPoolFactory = new ConnectionPoolFactory(factory);
 		this.factory = factory;
 	}

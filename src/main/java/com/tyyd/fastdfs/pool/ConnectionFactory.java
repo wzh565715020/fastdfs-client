@@ -7,7 +7,7 @@ import org.csource.fastdfs.StorageClient;
 import org.csource.fastdfs.TrackerClient;
 import org.csource.fastdfs.TrackerServer;
 
-import com.tyyd.fastdfs.FastDFSTemplateFactory;
+import com.tyyd.fastdfs.FastDfsTemplateFactory;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -17,9 +17,9 @@ import java.io.IOException;
  */
 class ConnectionFactory extends BasePooledObjectFactory<StorageClient> {
 	
-    private FastDFSTemplateFactory factory;
+    private FastDfsTemplateFactory factory;
 
-    public ConnectionFactory(FastDFSTemplateFactory templateFactory) {
+    public ConnectionFactory(FastDfsTemplateFactory templateFactory) {
         this.factory = templateFactory;
     }
 

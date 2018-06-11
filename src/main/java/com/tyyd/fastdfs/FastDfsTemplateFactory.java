@@ -14,7 +14,7 @@ import java.util.List;
  * FastDFS 初始化
  *
  */
-public class FastDFSTemplateFactory {
+public class FastDfsTemplateFactory {
 
 	// connect_timeout
 	private int g_connect_timeout;

@@ -12,7 +12,7 @@ FastDFS连接池
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <bean id="fastDFSFactory" class="com.anniweiya.fastdfs.FastDFSTemplateFactory" init-method="init">
+  <bean id="fastDFSFactory" class="com.tyyd.fastdfs.FastDFSTemplateFactory" init-method="init">
     <!--连接超时的时限，单位为秒-->
     <property name="g_connect_timeout" value="60"/>
     <!--网络超时的时限，单位为秒-->
@@ -21,7 +21,7 @@ FastDFS连接池
     <property name="g_anti_steal_token" value="true"/>
     <property name="g_secret_key" value="FastDFS1234567890"/>
     <property name="poolConfig">
-      <bean class="com.anniweiya.fastdfs.pool.PoolConfig">
+      <bean class="com.tyyd.fastdfs.pool.PoolConfig">
         <!--池的大小-->
         <property name="maxTotal" value="100"/>
         <!--连接池中最大空闲的连接数-->
@@ -37,7 +37,7 @@ FastDFS连接池
   </bean>
 
   <!--注入模板类-->
-  <bean id="fastDFSTemplate" class="com.anniweiya.fastdfs.FastDFSTemplate">
+  <bean id="fastDFSTemplate" class="com.tyyd.fastdfs.FastDFSTemplate">
     <constructor-arg ref="fastDFSFactory"/>
   </bean>
 

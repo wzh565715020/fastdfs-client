@@ -70,7 +70,7 @@
 	</tx:advice>
 	<aop:config>
 		<aop:pointcut id="fastdfsOperation"
-			expression="execution(public * com.tyyd.fastdfs.FastDFSTemplate..*.*(..))" />
+			expression="execution(public * com.tyyd.fastdfs.FastDfsTemplate..*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="fastdfsOperation" />
 	</aop:config>
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -82,7 +82,7 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource_druid" />
 	</bean>
-	<bean id="fastDFSFactory" class="com.tyyd.fastdfs.FastDFSTemplateFactory"
+	<bean id="fastDFSFactory" class="com.tyyd.fastdfs.FastDfsTemplateFactory"
 		init-method="init">
 		<!--连接超时的时限，单位为秒 -->
 		<property name="g_connect_timeout" value="${g_connect_timeout}" />
@@ -108,7 +108,7 @@
 	</bean>
 
 	<!--注入模板类 -->
-	<bean id="fastDFSTemplate" class="com.tyyd.fastdfs.FastDFSTemplate">
+	<bean id="fastDFSTemplate" class="com.tyyd.fastdfs.FastDfsTemplate">
 		<constructor-arg ref="fastDFSFactory" />
 	</bean>
 

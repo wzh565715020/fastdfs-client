@@ -34,9 +34,7 @@ public class FastDFSTemplate {
 	/**
 	 * 上传文件
 	 *
-	 * @param data
-	 * @param ext
-	 *            后缀，如：jpg、bmp（注意不带.）
+	 * @param dfs
 	 *
 	 * @return
 	 *
@@ -50,7 +48,23 @@ public class FastDFSTemplate {
 		fastDfsMapper.update(dfs);
 		return dfs;
 	}
-
+	/**
+	 * 上传文件
+	 *
+	 * @param dfs
+	 * @param values 
+	 * @return
+	 *
+	 * @throws FastDFSException
+	 */
+	public FastDfsInfo upload(FastDfsInfo dfs, Map<String, String> values) throws FastDFSException {
+		fastDfsMapper.add(dfs);
+		FastDfsInfo tmp =  this.upload(dfs.getFastDfsInfoBytes(), dfs.getExt(), null);
+		dfs.setGroup(tmp.getGroup());
+		dfs.setPath(tmp.getPath());
+		fastDfsMapper.update(dfs);
+		return dfs;
+	}
 	/**
 	 * 上传文件
 	 *
@@ -63,7 +77,7 @@ public class FastDFSTemplate {
 	 *
 	 * @throws FastDFSException
 	 */
-	public FastDfsInfo upload(byte[] data, String ext, Map<String, String> values) throws FastDFSException {
+	private FastDfsInfo upload(byte[] data, String ext, Map<String, String> values) throws FastDFSException {
 		NameValuePair[] valuePairs = null;
 		if (values != null && !values.isEmpty()) {
 			valuePairs = new NameValuePair[values.size()];
@@ -90,8 +104,11 @@ public class FastDFSTemplate {
 			releaseClient(client);
 		}
 	}
+	
 	public byte[] loadFileByUseridAndFileName(FastDfsInfo dfs) throws FastDFSException {
+		
 		FastDfsInfo fastDfsInfo = fastDfsMapper.query(dfs);
+		
 		return this.loadFile(fastDfsInfo.getGroup(), fastDfsInfo.getPath());
 	}
 
